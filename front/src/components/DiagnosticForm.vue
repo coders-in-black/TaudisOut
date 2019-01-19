@@ -1,20 +1,24 @@
 <template>
-  <div>
+  <v-ons-page>
+    <div v-if="currentStep">
     <h3>Évaluation (étape {{ currentStep.index }})</h3>
     <component :is="currentStep.component" @filled="stepFilled"/>
   </div>
+    <diagnostic-results v-if="currentStepId === 'results'" :answers="answers"></diagnostic-results>
+  </v-ons-page>
 </template>
 
 <script>
 
 import QuestionInsalubre from './questions/Insalubre'
-import QuestionHumidite from './questions/Humidite'
-// import QuestionFissures from './questions/Fissures'
+// import QuestionHumidite from './questions/Humidite'
+import QuestionFissures from './questions/Fissures'
 
 export default {
+  props: ['step'],
   data () {
     return {
-      currentStepId: 'insalubre',
+      currentStepId: this.step || 'insalubre',
       answers: {}
     };
   },
@@ -31,11 +35,11 @@ export default {
           component: QuestionFissures,
           index: 2
         },
-        {
-          id: 'humidite',
-          component: QuestionHumidite,
-          index: 2
-        },
+        // {
+        //   id: 'humidite',
+        //   component: QuestionHumidite,
+        //   index: 2
+        // },
 
       ]
     },
@@ -54,6 +58,13 @@ export default {
     stepFilled ({answer, next}) {
       this.answers[this.currentStepId] = answer
       this.currentStepId = next
+      if (next) {
+        this.$router.replace({
+          query: {
+            step: next,
+          }
+        })
+      }
     }
   }
 }
