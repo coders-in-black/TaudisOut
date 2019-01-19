@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <div>
     <v-ons-list-title>Mes Signalement</v-ons-list-title>
     <v-ons-list>
       <v-ons-list-item>Item A</v-ons-list-item>
@@ -36,7 +36,7 @@
     </div>
     <v-ons-button :disabled="!address" @click="submit">Envoyer</v-ons-button>
 
-  </v-ons-page>
+  </div>
 </template>
 
 <style>

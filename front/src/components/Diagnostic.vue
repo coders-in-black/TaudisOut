@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <div>
     <div v-if="!showDiagnostic">
       <h2>Évaluer mon logement</h2>
       <div>
@@ -12,7 +12,7 @@
       <v-ons-button @click="startDiagnostic" modifier="large">Démarrer l'évaluation</v-ons-button>
     </div>
     <diagnostic-form :step="step" v-else></diagnostic-form>
-  </v-ons-page>
+  </div>
 </template>
 
 <script>
@@ -24,7 +24,7 @@ export default {
   components: {DiagnosticForm},
   data () {
     return {
-      showDiagnostic: !!this.step
+      showDiagnostic: this.step
     };
   },
   methods: {
