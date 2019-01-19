@@ -53,6 +53,7 @@
 <script>
 import config from '../config'
 import PictureInput from 'vue-picture-input'
+import _ from 'lodash'
 
 export default {
   name: 'Declare',
@@ -98,13 +99,57 @@ export default {
         return idx !== image_idx
       })
     },
-    submit() {
-      this.$http.post(config.http.api + '/diagnostic', {
+    answers2arr() {
+      const answers = {
+        "insalubre": null,
+        "fissures": {
+          "cracks": true,
+          "detail": {
+            "lieu": "appartement",
+            "forme": "escalier",
+            "traversante": true,
+            "murPorteur": true,
+            "plusieursMurs": true,
+            "cloisonSol": true
+          }
+        }
+      };
+      return _.chain(answers)
+        .toPairs()
+        .filter(1)
+        .tap(console.log)
+        .map( ([diag_type, diag_answers]) =>
+          _.chain(diag_answers).keys().without('detail').map((q) => {
+            return {
+              type: diag_type,
+              q,
+              a: diag_answers[q]
+            }
+          })
+          .tap(console.log)
+          .value()
+          .concat(
+            _.map(diag_answers.detail, (a, q) => {
+              return {
+                type: diag_type,
+                q,
+                a
+              }
+            })
+          )
+        )
+        .flatten()
+        .tap(console.log)
+        .value()
+    },
+    async submit() {
+      response = await this.$http.post(config.http.api + '/diagnostic', {
         images: this.images.filter(image => image),
         location: this.location,
-        address: this.address
+        address: this.address,
+        questions: this.answers2arr()
       })
-      .then(response => console.log('response', response));
+      console.log('response', response);
     }
   }
 }

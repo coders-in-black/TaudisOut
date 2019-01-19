@@ -1,5 +1,7 @@
 module.exports = {
   http: {
-    api: 'http://localhost:3000'
+    api:
+      // '/api',
+      'http://localhost:3000'
   }
 }

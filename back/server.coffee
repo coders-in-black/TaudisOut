@@ -12,19 +12,21 @@ app = express()
 
 app.use cors()
 
-app.use bodyParser.json({ limit: '30Mb' })
+app.use bodyParser.json({ limit: '300Mb' })
 
 app.post '/diagnostic', (req, res) ->
   {
     location
     address
     images
+    questions
   } = req.body
 
   diag = new models.Diagnostic {
     location:
       coordinates: [location.lat, location.lng]
     address
+    questions
   }
 
   for image, idx in images

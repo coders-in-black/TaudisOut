@@ -1,6 +1,11 @@
 mongoose  = require "mongoose"
 Schema    = mongoose.Schema
 
+DiagTypes = [
+    'fissures'
+    'humidité'
+]
+
 DiagnosticSchema = new Schema
     location:
         type:
@@ -17,16 +22,16 @@ DiagnosticSchema = new Schema
         public: type: Boolean
     ]
     questions: [
+        type:
+            type: String
+            enum: DiagTypes
         q: String
         a: String
     ]
     diagnostic: [
        type:
             type: String
-            enum: [
-                'fissure'
-                'humidité'
-            ]
+            enum: DiagTypes
         severity:
             type: String
             enum: [
