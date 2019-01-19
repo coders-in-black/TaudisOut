@@ -1,14 +1,68 @@
 <template>
   <div id="app">
-    <main>
-      <router-view></router-view>
-    </main>
+    <v-ons-page>
+      <v-ons-toolbar>
+        <a href="/" class="center">BalanceTonTaudis</a>
+      </v-ons-toolbar>
+      <v-ons-tabbar
+              swipeable
+              position="auto"
+              @reactive="log('reactive')"
+              @postchange="log('postchange')"
+              @prechange="log('prechange')"
+              @init.native="log('init')"
+              @show.native="log('show')"
+              @hide.native="log('hide')"
+              @destroy.native="log('destroy')"
+      >
+        <router-view slot="pages"></router-view>
+        <!-- @todo : gérer les slot -->
+        <!--<router-view slot="pages"></router-view>-->
+        <v-ons-tab v-for="tab in tabs" :key="tab.name"
+                   :label="tab.label"
+                   :active="$route.name === tab.name"
+                   @click.prevent="$router.push({name: tab.name})"
+        ></v-ons-tab>
+      </v-ons-tabbar>
+    </v-ons-page>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'app'
+  name: 'app',
+  props: {
+      step: {required: false}
+  },
+  data() {
+      return {
+          tabs: [
+              {
+                  name: 'Diagnostic',
+                  label: 'Mon logement',
+                  icon: 'home',
+                  // props: {step: this.step}
+              },
+              {
+                  name: 'Declare',
+                  label: 'Signaler',
+                  icon: 'exclamation-triangle',
+                  // badge: 7,
+              },
+              {
+                  name: 'Settings',
+                  label: 'Réglages',
+                  icon: 'question-circle',
+              }
+          ]
+      }
+  },
+  methods: {
+      log(...args) {
+          console.log(...args)
+      }
+  }
 }
 </script>
 

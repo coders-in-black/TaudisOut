@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
 import VueOnsen from 'vue-onsenui'
 import { L } from 'vue2-leaflet'
 import VueResource from 'vue-resource'
@@ -9,6 +8,19 @@ import VueGeolocation from 'vue-browser-geolocation'
 import 'leaflet/dist/leaflet.css'
 import 'onsenui/css/onsenui.css'
 import 'onsenui/css/onsen-css-components.css'
+
+// import Declare from '@/components/Declare'
+import Home from '@/components/Home';
+import Declare from '@/components/Declare';
+import Diagnostic from '@/components/Diagnostic';
+
+const Settings = {
+  template: `
+<div>
+  Settings page
+</div>
+`
+}
 
 Vue.use(Router)
 Vue.use(VueOnsen)
@@ -28,10 +40,30 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/accueil',
+      alias: '/',
       name: 'Home',
       component: Home,
-      props: (route) => ({ step: route.query.step })
-    }
+      // props: (route) => ({ step: route.query.step })
+    },
+    {
+      path: '/diagnostic',
+      alias: '/',
+      name: 'Diagnostic',
+      component: Diagnostic,
+      // props: (route) => ({ step: route.query.step })
+    },
+    {
+      path: '/declarer',
+      name: 'Declare',
+      component: Declare,
+      // props: (route) => ({ step: route.query.step })
+    },
+    {
+      path: '/reglages',
+      name: 'Settings',
+      component: Settings,
+      // props: (route) => ({ step: route.query.step })
+    },
   ]
 })
