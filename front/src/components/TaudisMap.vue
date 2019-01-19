@@ -8,7 +8,7 @@
       @update:bounds="boundsUpdated"
     >
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker :lat-lng="center" > </l-marker>
+      <l-marker :lat-lng="center"></l-marker>
     </l-map>
   </v-ons-page>
 </template>
