@@ -1,49 +1,72 @@
 <template>
   <div>
-    <h4>Les murs de votre logement présentent-ils des fissures?</h4>
+    {{ detail }}
+    <h4>Les murs de votre habitation présentent-ils des fissures?</h4>
     <div v-if="cracks === null">
       <v-ons-button @click="cracks = true">Oui</v-ons-button>
-      <v-ons-button @click="$emit('filled', {answer: false, next: null})">Non</v-ons-button>
+      <v-ons-button @click="$emit('filled', {answer: false, next: 'results'})">Non</v-ons-button>
     </div>
     <div v-if="cracks">
-      <v-ons-list-title>Combien de fissures voyez-vous ?</v-ons-list-title>
-      <v-ons-list v-for="row in countChoices" :key="row.value" tappable>
-        <v-ons-list-item>
-          <label class="left">
-            <v-ons-radio :input-id="'radio-' + row.value" :value="row.value" v-model="detail.count"></v-ons-radio>
-          </label>
-          <label :for="'radio-' + row.value" class="center">{{ row.label }}</label>
-        </v-ons-list-item>
-      </v-ons-list>
-      <v-ons-list-title>Décrivez la nature et l'apparence des fissures constatées</v-ons-list-title>
-      <v-ons-list tappable>
-        <image-choice
-          :input-id="'traversante'"
-          :label="'La fissure est traversante (visible des deux côtés du mur)'"
-          :sample-url="'http://example.com/test.png'"
-          @updated="handle('traversante', $event)"
-        ></image-choice>
-        <image-choice
-          :input-id="'exterieur'"
-          :label="'La fissure est présente sur un mur exterieur du bâtiment'"
-          :sample-url="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU5CQCNe9q4P1NwCIiuFEjO7FmffFq9pV-e8OYxEvvxoT1d16YIg'"
-          @updated="handle('exterieur', $event)"
-        ></image-choice>
-        <image-choice
-          :input-id="'interieur'"
-          :label="'La fissure est présente sur un mur intérieur du bâtiment'"
-          :sample-url="'http://example.com/test.png'"
-          @updated="handle('interieur', $event)"
-        ></image-choice>
-        <image-choice
-          :input-id="'escalier'"
-          :label="'La fissure est en escalier'"
-          :sample-url="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU5CQCNe9q4P1NwCIiuFEjO7FmffFq9pV-e8OYxEvvxoT1d16YIg'"
-          @updated="handle('escalier', $event)"
-        ></image-choice>
-      </v-ons-list>
+      <button-question
+        :choices="[{label: 'Sur la facade', value: 'facade'}, {label: 'Dans la cage d\'escalier', value: 'escaier'}, {label: 'Dans un appartement', value: 'appartement'}]"
+        :value.sync="detail.lieu"
+      >
+        <h4>À quel endroit se trouve la fissure ?</h4>
+      </button-question>
+      <button-question
+        :choices="[{label: 'En escalier', value: 'escalier'}, {label: 'Droite', value: 'droite'}]"
+        :show-unknown="true"
+        :value.sync="detail.forme"
+      >
+        <h4>Quelle est la forme de la fissure ?</h4>
+      </button-question>
+      <button-question
+        :choices="[{label: 'Oui', value: true}, {label: 'Non', value: false}]"
+        :value.sync="detail.traversante"
+      >
+        <h4>Est-ce que la fissure est traversante ?</h4>
+        <p>Une fissure traversante est une fissure visible des deux côtés du mur</p>
+      </button-question>
+      <div v-if="detail.lieu === 'facade'">
+        <button-question
+          :choices="[{label: 'Sous les fenêtres', value: 'linteauxFenetres'}, {label: 'Au dessus de la porte', value: 'linteauxFenetres'}, {label: 'Sur un mur, en diagonale', value: 'diagonale'}]"
+          :value.sync="detail.emplacement"
+        >
+          <h4>À quel endroit se situe la fissure</h4>
+        </button-question>
+      </div>
+      <div v-if="detail.lieu === 'escalier'">
+        <button-question
+          :choices="[{label: 'Oui', value: true}, {label: 'Non', value: false}]"
+          :value.sync="detail.escalierPenche"
+        >
+          <h4>Est-ce que l'escalier penche ?</h4>
+        </button-question>
+      </div>
+      <div v-if="detail.lieu === 'appartement'">
+        <button-question
+          :choices="[{label: 'Oui', value: true}, {label: 'Non', value: false}]"
+          :show-unknown="true"
+          :value.sync="detail.murPorteur"
+        >
+          <h4>Est-ce que la fissure se situe sur un mur porteur ?</h4>
+        </button-question>
+
+        <button-question
+          :choices="[{label: 'Oui', value: true}, {label: 'Non', value: false}]"
+          :value.sync="detail.plusieursMurs"
+        >
+          <h4>Est-ce que la fissure court sur plusieurs murs ?</h4>
+        </button-question>
+        <button-question
+          :choices="[{label: 'Oui', value: true}, {label: 'Non', value: false}]"
+          :value.sync="detail.cloisonSol"
+        >
+          <h4>Est-ce que la cloison se décolle du sol ?</h4>
+        </button-question>
+      </div>
       <v-ons-button
-        @click="$emit('filled', {answer: {cracks: true, detail: detail}, next: null})"
+        @click="$emit('filled', {answer: {cracks: true, detail: detail}, next: 'results'})"
       >Étape suivante</v-ons-button>
     </div>
   </div>
@@ -51,19 +74,25 @@
 
 <script>
 
-import ImageChoice from './ImageChoice'
+import ButtonQuestion from './ButtonQuestion'
 
 export default {
   components: {
-    ImageChoice
+    ButtonQuestion
   },
   data () {
     return {
       cracks: null,
       detail: {
-        count: 0,
-      },
-      countChoices: [{value: 1, label: 'Une fissure'}, {value: 2, label: 'Entre deux et cinq fissures'}, {value: 5, label: 'Plus de cinq fissures'}]
+        lieu: undefined,
+        forme: undefined,
+        traversante: undefined,
+        emplacement: undefined,
+        escalierPenche: undefined,
+        murPorteur: undefined,
+        plusieursMurs: undefined,
+        cloisonSol: undefined,
+      }
     }
   },
   methods: {

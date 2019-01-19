@@ -1,21 +1,25 @@
 <template>
   <v-ons-page>
     <div v-if="currentStep">
-    <h3>Évaluation (étape {{ currentStep.index }})</h3>
-    <component :is="currentStep.component" @filled="stepFilled"/>
-  </div>
+      <h3>Évaluation (étape {{ currentStep.index }})</h3>
+      <component :is="currentStep.component" @filled="stepFilled"/>
+    </div>
     <diagnostic-results v-if="currentStepId === 'results'" :answers="answers"></diagnostic-results>
   </v-ons-page>
 </template>
 
 <script>
 
+import DiagnosticResults from './DiagnosticResults'
 import QuestionInsalubre from './questions/Insalubre'
 // import QuestionHumidite from './questions/Humidite'
 import QuestionFissures from './questions/Fissures'
 
 export default {
   props: ['step'],
+  components: {
+    DiagnosticResults
+  },
   data () {
     return {
       currentStepId: this.step || 'insalubre',
@@ -59,7 +63,7 @@ export default {
       this.answers[this.currentStepId] = answer
       this.currentStepId = next
       if (next) {
-        this.$router.replace({
+        this.$router.push({
           query: {
             step: next,
           }
