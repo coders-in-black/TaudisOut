@@ -1,0 +1,23 @@
+{
+  "name": "balancetontaudisback",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.1-alpha.1",
+    "express-promise-router": "^3.0.3",
+    "lodash": "^4.17.11",
+    "mongo-sanitize": "^1.0.1",
+    "mongoose": "^5.4.5",
+    "sharp": "^0.21.2",
+    "twitter": "^1.7.1"
+  }
+}
