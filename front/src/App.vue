@@ -5,7 +5,6 @@
         <a href="/" class="center">BalanceTonTaudis</a>
       </v-ons-toolbar>
       <v-ons-tabbar
-              swipeable
               position="auto"
               @reactive="log('reactive')"
               @postchange="log('postchange')"
@@ -19,9 +18,10 @@
         <!-- @todo : gérer les slot -->
         <!--<router-view slot="pages"></router-view>-->
         <v-ons-tab v-for="tab in tabs" :key="tab.name"
-                   :label="tab.label"
-                   :active="$route.name === tab.name"
-                   @click.prevent="$router.push({name: tab.name})"
+          :icon="tab.icon"
+          :label="tab.label"
+          :active="$route.name === tab.name"
+          @click.prevent="$router.push({name: tab.name})"
         ></v-ons-tab>
       </v-ons-tabbar>
     </v-ons-page>

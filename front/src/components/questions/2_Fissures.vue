@@ -4,7 +4,7 @@
     <h4>Les murs de votre habitation présentent-ils des fissures?</h4>
     <div v-if="cracks === null">
       <v-ons-button @click="cracks = true">Oui</v-ons-button>
-      <v-ons-button @click="$emit('filled', {answer: false, next: 'results'})">Non</v-ons-button>
+      <v-ons-button @click="$emit('filled', {next: 'photos'})">Non</v-ons-button>
     </div>
     <div v-if="cracks">
       <button-question
@@ -66,7 +66,7 @@
         </button-question>
       </div>
       <v-ons-button
-        @click="$emit('filled', {answer: {cracks: true, detail: detail}, next: 'results'})"
+        @click="$emit('filled', {next: 'photos'})"
       >Étape suivante</v-ons-button>
     </div>
   </div>
@@ -75,13 +75,14 @@
 <script>
 
 import ButtonQuestion from './ButtonQuestion'
+import shared from '../../shared.js'
 
 export default {
   components: {
     ButtonQuestion
   },
   data () {
-    return {
+    return shared.answers.fissures = {
       cracks: null,
       detail: {
         lieu: undefined,

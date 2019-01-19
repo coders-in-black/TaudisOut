@@ -12,6 +12,8 @@ import 'onsenui/css/onsen-css-components.css'
 import TaudisMap from '@/components/TaudisMap'
 import Declare from '@/components/Declare';
 import Diagnostic from '@/components/Diagnostic';
+import DiagnosticForm from '@/components/DiagnosticForm';
+import DiagnosticResults from '@/components/DiagnosticResults';
 
 const Settings = {
   template: `
@@ -50,6 +52,20 @@ export default new Router({
       alias: '/',
       name: 'Diagnostic',
       component: Diagnostic,
+      // props: (route) => ({ step: route.query.step })
+    },
+    {
+      path: '/diagnostic/new',
+      alias: '/',
+      name: 'DiagnosticForm',
+      component: DiagnosticForm,
+      // props: (route) => ({ step: route.query.step })
+    },
+    {
+      path: '/diagnostic/result',
+      alias: '/',
+      name: 'DiagnosticResults',
+      component: DiagnosticResults,
       // props: (route) => ({ step: route.query.step })
     },
     {

@@ -1,29 +1,27 @@
 <template>
-  <v-ons-page>
+  <v-ons-page shown>
     <div v-if="currentStep">
-      <h3>Évaluation (étape {{ currentStep.index }})</h3>
+      <h3>Évaluation (étape {{ num_step }})</h3>
       <component :is="currentStep.component" @filled="stepFilled"/>
     </div>
-    <diagnostic-results v-if="currentStepId === 'results'" :answers="answers"></diagnostic-results>
   </v-ons-page>
 </template>
 
 <script>
 
-import DiagnosticResults from './DiagnosticResults'
-import QuestionInsalubre from './questions/Insalubre'
+import QuestionInsalubre from './questions/1_Insalubre'
 // import QuestionHumidite from './questions/Humidite'
-import QuestionFissures from './questions/Fissures'
+import QuestionFissures from './questions/2_Fissures'
+import QuestionPhotos from './questions/3_Photos'
+import QuestionAddress from './questions/4_Address'
+import shared from '../shared.js'
 
 export default {
   props: ['step'],
-  components: {
-    DiagnosticResults
-  },
   data () {
     return {
-      currentStepId: this.step || 'insalubre',
-      answers: {}
+      num_step: 1,
+      currentStepId: this.step || 'insalubre'
     };
   },
   computed: {
@@ -31,14 +29,20 @@ export default {
       return [
         {
           id: 'insalubre',
-          component: QuestionInsalubre,
-          index: 1
+          component: QuestionInsalubre
         },
         {
           id: 'fissures',
-          component: QuestionFissures,
-          index: 2
+          component: QuestionFissures
         },
+        {
+          id: 'photos',
+          component: QuestionPhotos
+        },
+        {
+          id: 'address',
+          component: QuestionAddress
+        }
         // {
         //   id: 'humidite',
         //   component: QuestionHumidite,
@@ -59,8 +63,8 @@ export default {
     }
   },
   methods: {
-    stepFilled ({answer, next}) {
-      this.answers[this.currentStepId] = answer
+    stepFilled ({next}) {
+      this.num_step++
       this.currentStepId = next
       if (next) {
         this.$router.push({

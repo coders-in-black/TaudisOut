@@ -3,6 +3,7 @@ mongoose  = require "mongoose"
 Schema    = mongoose.Schema
 
 DiagTypes = [
+    'insalubre'
     'fissures'
     'humidité'
 ]
