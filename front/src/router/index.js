@@ -9,8 +9,7 @@ import 'leaflet/dist/leaflet.css'
 import 'onsenui/css/onsenui.css'
 import 'onsenui/css/onsen-css-components.css'
 
-// import Declare from '@/components/Declare'
-import Home from '@/components/Home';
+import TaudisMap from '@/components/TaudisMap'
 import Declare from '@/components/Declare';
 import Diagnostic from '@/components/Diagnostic';
 
@@ -43,7 +42,7 @@ export default new Router({
       path: '/accueil',
       alias: '/',
       name: 'Home',
-      component: Home,
+      component: TaudisMap,
       // props: (route) => ({ step: route.query.step })
     },
     {

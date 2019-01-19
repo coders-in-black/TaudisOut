@@ -29,7 +29,7 @@
       </button-question>
       <div v-if="detail.lieu === 'facade'">
         <button-question
-          :choices="[{label: 'Sous les fenêtres', value: 'linteauxFenetres'}, {label: 'Au dessus de la porte', value: 'linteauxFenetres'}, {label: 'Sur un mur, en diagonale', value: 'diagonale'}]"
+          :choices="[{label: 'Sous les fenêtres', value: 'linteauxFenetres'}, {label: 'Au dessus de la porte', value: 'porte'}, {label: 'Sur un mur, en diagonale', value: 'diagonale'}]"
           :value.sync="detail.emplacement"
         >
           <h4>À quel endroit se situe la fissure</h4>

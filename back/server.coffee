@@ -12,7 +12,16 @@ app = express()
 
 app.use cors()
 
-app.use bodyParser.json({ limit: '300Mb' })
+app.use express.static('data')
+
+app.use bodyParser.json({ limit: '20Mb' })
+
+app.get '/poi', (req, res) ->
+  pois = await models.Diagnostic.find()
+
+  res.json
+    result: 'success'
+    data: _.invokeMap pois, 'toAPI'
 
 app.post '/diagnostic', (req, res) ->
   {
@@ -36,12 +45,9 @@ app.post '/diagnostic', (req, res) ->
     console.log image.length, image[0..15]
     console.log 'img', img.imageType
     await fs.writeFile config.data.dir + "/" + filename, img.dataBuffer
-    diag.images.push url: filename
+    diag.images.push filename
 
-  console.log 'saving'
   await diag.save()
-
-  console.log('ok', diag.toAPI())
 
   res.json
     result: 'success'

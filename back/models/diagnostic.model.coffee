@@ -1,3 +1,4 @@
+config    = require '../config'
 mongoose  = require "mongoose"
 Schema    = mongoose.Schema
 
@@ -17,10 +18,7 @@ DiagnosticSchema = new Schema
             type: [Number]
             required: true
     address: String
-    images: [
-        url: String
-        public: type: Boolean
-    ]
+    images: [ String ]
     questions: [
         type:
             type: String
