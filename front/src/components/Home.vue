@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="center">BalanceTonTaudis</div>
+      <a href="/" class="center">BalanceTonTaudis</a>
     </v-ons-toolbar>
     <v-ons-tabbar
       swipeable
