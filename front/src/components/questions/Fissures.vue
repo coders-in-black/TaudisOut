@@ -24,16 +24,22 @@
           @updated="handle('traversante', $event)"
         ></image-choice>
         <image-choice
+          :input-id="'exterieur'"
+          :label="'La fissure est présente sur un mur exterieur du bâtiment'"
+          :sample-url="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU5CQCNe9q4P1NwCIiuFEjO7FmffFq9pV-e8OYxEvvxoT1d16YIg'"
+          @updated="handle('exterieur', $event)"
+        ></image-choice>
+        <image-choice
           :input-id="'interieur'"
           :label="'La fissure est présente sur un mur intérieur du bâtiment'"
           :sample-url="'http://example.com/test.png'"
           @updated="handle('interieur', $event)"
         ></image-choice>
         <image-choice
-          :input-id="'exterieur'"
-          :label="'La fissure est présente sur un mur exterieur du bâtiment'"
-          :sample-url="'http://example.com/test.png'"
-          @updated="handle('exterieur', $event)"
+          :input-id="'escalier'"
+          :label="'La fissure est en escalier'"
+          :sample-url="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU5CQCNe9q4P1NwCIiuFEjO7FmffFq9pV-e8OYxEvvxoT1d16YIg'"
+          @updated="handle('escalier', $event)"
         ></image-choice>
       </v-ons-list>
       <v-ons-button
