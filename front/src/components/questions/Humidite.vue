@@ -7,15 +7,21 @@
     </div>
     <div v-if="value">
       <h5>Quels type de traces observez-vous ?</h5>
-      <image-choice @updated="handle('suintement', $event)" :src="'test.png'">Suintements</image-choice>
-      <image-choice @updated="handle('fuite', $event)" :src="'test.png'">Fuites</image-choice>
-      <v-ons-button @click="$emit('filled', {answer: {value: true, detail:}, next: null})">Terminer</v-ons-button>
+      <image-choice
+        :id="suintement"
+        @updated="handle('suintement', $event)"
+        :src="'test.png'"
+      >Suintements</image-choice>
+      <image-choice :id="fuite" @updated="handle('fuite', $event)" :src="'test.png'">Fuites</image-choice>
+      <v-ons-button
+        @click="$emit('filled', {answer: {value: true, detail:}, next: null})"
+      >Passer à l'étape suivante</v-ons-button>
     </div>
   </div>
 </template>
 
 <script>
-
+from
 export default {
   data () {
     return {

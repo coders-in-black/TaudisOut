@@ -11,7 +11,7 @@
       </div>
       <v-ons-button @click="startDiagnostic" modifier="large">Démarrer l'évaluation</v-ons-button>
     </div>
-    <diagnostic-form v-else></diagnostic-form>
+    <diagnostic-form :step="step" v-else></diagnostic-form>
   </div>
 </template>
 
@@ -20,10 +20,11 @@
 import DiagnosticForm from './DiagnosticForm'
 
 export default {
+  props: ['step'],
   components: {DiagnosticForm},
   data () {
     return {
-      showDiagnostic: false
+      showDiagnostic: !!this.step
     };
   },
   methods: {

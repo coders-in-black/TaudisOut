@@ -21,11 +21,13 @@ L.Icon.Default.mergeOptions({
 });
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      props: (route) => ({ step: route.query.step })
     }
   ]
 })

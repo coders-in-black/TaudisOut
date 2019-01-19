@@ -3,7 +3,6 @@
     <v-ons-toolbar>
       <div class="center">BalanceTonTaudis</div>
     </v-ons-toolbar>
-
     <v-ons-tabbar
       swipeable
       :tabs="tabs"
@@ -51,6 +50,9 @@ const settings = {
   `
 }
 export default {
+  props: {
+    step: {required: false}
+  },
   data() {
     return {
       tabbarIndex: 0,
@@ -59,7 +61,8 @@ export default {
         {
           label: 'Mon logement',
           icon: 'home',
-          page: Diagnostic
+          page: Diagnostic,
+          props: {step: this.step}
         },
         // {
         //   label: 'Carte',

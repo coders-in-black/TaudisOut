@@ -8,13 +8,14 @@
 <script>
 
 import QuestionInsalubre from './questions/Insalubre'
-import QuestionHumidite from './questions/Humidite'
-// import QuestionFissures from './questions/Fissures'
+// import QuestionHumidite from './questions/Humidite'
+import QuestionFissures from './questions/Fissures'
 
 export default {
+  props: ['step'],
   data () {
     return {
-      currentStepId: 'insalubre',
+      currentStepId: this.step || 'insalubre',
       answers: {}
     };
   },
@@ -31,11 +32,11 @@ export default {
           component: QuestionFissures,
           index: 2
         },
-        {
-          id: 'humidite',
-          component: QuestionHumidite,
-          index: 2
-        },
+        // {
+        //   id: 'humidite',
+        //   component: QuestionHumidite,
+        //   index: 2
+        // },
 
       ]
     },
@@ -54,6 +55,13 @@ export default {
     stepFilled ({answer, next}) {
       this.answers[this.currentStepId] = answer
       this.currentStepId = next
+      if (next) {
+        this.$router.replace({
+          query: {
+            step: next,
+          }
+        })
+      }
     }
   }
 }
