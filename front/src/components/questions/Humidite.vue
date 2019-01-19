@@ -14,7 +14,7 @@
       >Suintements</image-choice>
       <image-choice :id="fuite" @updated="handle('fuite', $event)" :src="'test.png'">Fuites</image-choice>
       <v-ons-button
-        @click="$emit('filled', {answer: {value: true, detail:}, next: null})"
+        @click="$emit('filled', {answer: {value: true, detail: null}, next: null})"
       >Passer à l'étape suivante</v-ons-button>
     </div>
   </div>
