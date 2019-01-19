@@ -1,9 +1,9 @@
 <template>
   <v-ons-page>
     <div v-if="currentStep">
-    <h3>Évaluation (étape {{ currentStep.index }})</h3>
-    <component :is="currentStep.component" @filled="stepFilled"/>
-  </div>
+      <h3>Évaluation (étape {{ currentStep.index }})</h3>
+      <component :is="currentStep.component" @filled="stepFilled"/>
+    </div>
     <diagnostic-results v-if="currentStepId === 'results'" :answers="answers"></diagnostic-results>
   </v-ons-page>
 </template>

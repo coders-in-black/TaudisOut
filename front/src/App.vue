@@ -47,4 +47,7 @@ header span {
   box-sizing: border-box;
   padding-top: 16px;
 }
+.page__content {
+  padding: 8px;
+}
 </style>
