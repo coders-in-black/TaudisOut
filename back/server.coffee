@@ -35,6 +35,8 @@ app.post '/diagnostic', (req, res) ->
     address
     images
     questions
+    diagnostic
+    status
   } = req.body
 
   diag = new models.Diagnostic {
@@ -42,6 +44,8 @@ app.post '/diagnostic', (req, res) ->
       coordinates: [location.lat, location.lng]
     address
     questions
+    diagnostic
+    status
   }
 
   for image, idx in images
