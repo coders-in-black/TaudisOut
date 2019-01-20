@@ -15,6 +15,9 @@
           v-if="results.dangerosity === 4"
         >Vous devez impérativement notifier le syndic et le propriétaire du caractère grave et urgent de la situation, par recommandé.</v-ons-list-item>
         <v-ons-list-item
+          v-if="results.dangerosity < 4 && results.advices.fissures"
+        >Informez le syndic et le propriétaire de la présence et des caractéristiques de la fissure, par recommandé, ainsi qu'en cas d'évolution de la fissure.</v-ons-list-item>
+        <v-ons-list-item
           v-if="results.dangerosity >= 3"
         >Nous vous invitons à signaler également le problème au Pôle départemental de lutte contre l'habitat indigne, qui pourra envoyer un expert :
           <ul>
@@ -42,9 +45,6 @@
         <v-ons-list-item v-if="results.dangerosity >= 2">
           <router-link to="/guide">Entrez en contact avec les associations de terrain</router-link>&nbsp;qui pourront vous accompagner dans vos démarches.
         </v-ons-list-item>
-        <v-ons-list-item
-          v-if="results.dangerosity < 4 && results.advices.fissures"
-        >Tenez le syndic et le propriétaire informé en cas d'évolution de la fissure.</v-ons-list-item>
       </v-ons-list>
     </div>
     <div>
