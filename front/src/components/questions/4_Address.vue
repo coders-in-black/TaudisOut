@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Confirmer votre addresse : </h4>
+    <h4>Sélectionner votre addresse : </h4>
     <spinner v-if="0 === addresses.length" class="spinner"></spinner>
     <v-ons-list>
       <v-ons-list-item v-for="(_address, $index) in addresses" :key="$index" tappable>
@@ -8,6 +8,7 @@
           <v-ons-radio
             :input-id="'radio-' + $index"
             :value="_address"
+            modifier="material"
             v-model=" address"
           >
           </v-ons-radio>
