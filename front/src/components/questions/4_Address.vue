@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Confirmer votre addresse :</h4>
+    <h4>Confirmer votre addresse (optionnel)</h4>
     <p>Ceci nous permettra de conserver une trace de votre diagnostic pour soutenir la lutte contre le logement indigne.</p>
     <v-ons-list>
       <v-ons-list-item v-for="(_address, $index) in addresses" :key="$index" tappable>
@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import config from '../../config'
 import shared from '../../shared.js'
+import config from '../../config'
 
 export default {
   async mounted() {
@@ -42,8 +42,6 @@ export default {
       if (this.address) {
         shared.address = this.address
         shared.location = this.location
-        const response = await this.$http.post(config.http.api + '/diagnostic', shared.payload())
-        console.log('response', response);
       }
       this.$router.push({
         name: 'DiagnosticResults'
