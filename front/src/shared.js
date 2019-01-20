@@ -117,6 +117,26 @@ export default {
               .value()
           })
           .value()
+    let icon_color = diagnostic_detail.status === 'DiagnosticPending' ? 'grey' :
+      (['WorksDone', 'Solved'].includes(diagnostic_detail.status) || diagnostic_detail.diagnostic.severity === 'confort' ?
+        'green' : (
+          diagnostic_detail.diagnostic.severity === 'urgence' ? 'red' : 'orange'
+        )
+      )
+    diagnostic_detail.icon = `/static/img/icons/point_${icon_color}.png`
+    diagnostic_detail.big_icon = `/static/img/icons/point_${icon_color}_30.png`
+
+    if (diagnostic_detail.diagnostic && diagnostic_detail.diagnostic.types && diagnostic_detail.diagnostic.types.length) {
+      icon_color =
+        (diagnostic_detail.diagnostic.types[0].severity === 'confort' ?
+          'green' : (
+            diagnostic_detail.diagnostic.types[0].severity === 'urgence' ? 'red' : 'orange'
+          )
+        )
+      diagnostic_detail.diagnostic.types[0].icon = `/static/img/icons/point_${icon_color}.png`
+      diagnostic_detail.diagnostic.types[0].big_icon = `/static/img/icons/point_${icon_color}_30.png`
+    }
+
     return diagnostic_detail
   },
   prepareAnswers() {
