@@ -73,22 +73,12 @@ export default {
       center: [43.2923576651113, 5.383435562252999],
       bounds: null,
       markers: [
-
       ]
     };
   },
   async mounted() {
     const response = await this.$http.get(config.http.api + '/poi')
     this.markers = response.body.data.map( marker => shared.toView(marker));
-    this.markers.forEach( marker => {
-      const icon_color = marker.status === 'DiagnosticPending' ? 'grey' :
-        (['WorksDone', 'Solved'].includes(marker.status) || marker.diagnostic.severity === 'confort' ?
-          'green' : (
-            marker.diagnostic.severity === 'urgence' ? 'red' : 'orange'
-          )
-        )
-      marker.icon = `static/img/icons/point_${icon_color}.png`
-    })
   },
   methods: {
     zoomUpdated (zoom) {

@@ -3,12 +3,14 @@
    <v-ons-card>
       <img v-for="(image, idx) in diagnostic.images" v-bind:key='idx' :src="image" width='80%'/>
       <div class="title">
-        {{diagnostic.address}}
+        {{diagnostic.address}} <img :src="diagnostic.big_icon" style="vertical-align: middle">
       </div>
       <div class="content">
         <v-ons-list>
           <template v-for="(questions, diagType) in diagnostic.questions">
-            <v-ons-list-header :key="diagType">{{diagType}}</v-ons-list-header>
+            <v-ons-list-header :key="diagType">
+              {{diagType}} <img v-if="diagnostic.diagnostic && diagnostic.diagnostic.types.length" :src="diagnostic.diagnostic.types[0].icon" style="vertical-align: middle">
+            </v-ons-list-header>
             <v-ons-list-item v-for="(question, idx) in questions" v-bind:key='idx'>
               {{question}}
               <span class="right" v-if="question.indexOf('Ne sais pas') >= 0">
