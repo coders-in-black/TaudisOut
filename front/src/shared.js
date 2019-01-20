@@ -49,7 +49,12 @@ export default {
 
     return {
       severity: severities[this.diagnostic.dangerosity],
-      types: [{type: 'fissures', severity: severities[this.diagnostic.dangerosity]}],
+      types: [
+        {
+          type: 'fissures',
+          severity: severities[this.diagnostic.dangerosity]
+        }
+      ],
       status: 'DiagnosticCompleted'
     }
   },
