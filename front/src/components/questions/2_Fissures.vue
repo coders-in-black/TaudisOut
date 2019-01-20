@@ -27,9 +27,15 @@
         <h4>Est-ce que la fissure est traversante ?</h4>
         <p>Une fissure traversante est une fissure visible des deux côtés du mur</p>
       </button-question>
+      <button-question
+        :choices="[{label: 'Ces dernières heures', value: 'heure'}, {label: 'Ces derniers jours', value: 'jour'}, {label: 'Ces derniers mois', value: 'mois'}, {label: 'Non', value: false}]"
+        :value.sync="detail.evolutive"
+      >
+        <h4>Avez-vous constaté une évolution de la fissure ?</h4>
+      </button-question>
       <div v-if="detail.lieu === 'facade'">
         <button-question
-          :choices="[{label: 'Sous les fenêtres', value: 'linteauxFenetres'}, {label: 'Au dessus de la porte', value: 'porte'}, {label: 'Sur un mur, en diagonale', value: 'diagonale'}]"
+          :choices="[{label: 'Sous les fenêtres', value: 'fenetres'}, {label: 'Au dessus de la porte', value: 'porte'}, {label: 'Sur un mur, en diagonale', value: 'diagonale'}]"
           :value.sync="detail.emplacement"
         >
           <h4>À quel endroit se situe la fissure</h4>
@@ -91,6 +97,7 @@ export default {
         murPorteur: undefined,
         plusieursMurs: undefined,
         cloisonSol: undefined,
+        evolutive: undefined,
       }
     }
   },
