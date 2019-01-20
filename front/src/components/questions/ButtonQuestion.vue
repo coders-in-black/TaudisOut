@@ -30,8 +30,3 @@ export default {
   }
 }
 </script>
-<style>
-.button {
-  margin-left: 1em;
-}
-</style>
