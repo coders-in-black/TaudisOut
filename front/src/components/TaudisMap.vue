@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-ons-page shown>
     <l-map
       :zoom="zoom"
       :center="center"
@@ -32,12 +32,15 @@
         </l-icon>
       </l-marker>
     </l-map>
-  </div>
+  </v-ons-page>
 </template>
 
 <style>
 .leaflet-popup-content {
   width: 250px !important;
+}
+.page__content {
+  padding: 0px;
 }
 .marker {
   padding: 18px;

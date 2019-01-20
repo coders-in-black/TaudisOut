@@ -53,8 +53,8 @@ export default new Router({
       // props: (route) => ({ step: route.query.step })
     },
     {
-      path: '/map',
-      name: 'Carte',
+      path: '/carte',
+      name: 'Map',
       component: TaudisMap,
       // props: (route) => ({ step: route.query.step })
     },

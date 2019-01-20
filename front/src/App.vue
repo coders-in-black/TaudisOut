@@ -49,7 +49,7 @@ export default {
                   // props: {step: this.step}
               },
               {
-                  name: 'Carte',
+                  name: 'Map',
                   label: 'Carte',
                   icon: 'map-marked-alt',
                   // badge: 7,
@@ -69,6 +69,7 @@ export default {
   },
   methods: {
       log(...args) {
+        console.log(this.$route)
           console.log(...args)
       }
   }
