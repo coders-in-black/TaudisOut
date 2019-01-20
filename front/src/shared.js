@@ -7,6 +7,7 @@ export default {
     this.address = null
     this.location = null
     this.images = [ null ]
+    this.results = null
   },
   prepareAnswers() {
     return _.chain(this.answers)
@@ -37,12 +38,28 @@ export default {
       .tap(console.log)
       .value()
   },
+  prepareDiagnostic() {
+    let severities = [
+      'confort',
+      'indecency',
+      'unhealthy',
+      'urgence',
+      'urgence',
+    ]
+
+    return {
+      severity: severities[this.diagnostic.dangerosity],
+      types: [{type: 'fissures', severity: severities[this.diagnostic.dangerosity]}],
+      status: 'DiagnosticCompleted'
+    }
+  },
   payload() {
     return {
       images: this.images.filter(image => image),
       location: this.location,
       address: this.address,
-      questions: this.prepareAnswers()
+      questions: this.prepareAnswers(),
+      diagnostic: this.prepareDiagnostic()
     }
   },
   images: [ null ],

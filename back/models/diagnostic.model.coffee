@@ -62,6 +62,7 @@ DiagnosticSchema = new Schema
     status:
         type: String
         enum: Statuses
+        default: 'DiagnosticPending'
     public:
         type: Boolean
 
@@ -69,19 +70,15 @@ DiagnosticSchema = new Schema
 DiagnosticSchema.methods.toAPI = (mode = 'list') ->
     switch mode
         when 'detail'
-            to_ret = @toObject()
-            to_ret.diagnostic.severity = _.sample DiagSeverity
-            to_ret.status = _.sample Statuses[0..1]
-            to_ret
+            @toObject()
         when 'list'
             {
                 @_id
                 @location
                 @images
                 @questions
-                diagnostic:
-                    severity: _.sample DiagSeverity
-                status: _.sample Statuses[0..1]
+                @diagnostic
+                @status
             }
 
 module.exports = Diagnostic = mongoose.model 'Diagnostic', DiagnosticSchema
