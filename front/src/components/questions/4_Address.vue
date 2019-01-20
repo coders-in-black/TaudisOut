@@ -17,7 +17,9 @@
         </label>
       </v-ons-list-item>
     </v-ons-list>
-    <v-ons-button :disabled="!address || sending" @click="submit()">Envoyer</v-ons-button>
+    <div class="btn__content mtm">
+      <v-ons-button :disabled="!address || sending" @click="submit()">Envoyer</v-ons-button>
+    </div>
   </div>
 </template>
 
