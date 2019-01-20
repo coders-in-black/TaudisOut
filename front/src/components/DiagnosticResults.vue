@@ -3,13 +3,7 @@
     <h4>Votre diagnostic est terminé, voici vos résultats :</h4>
     <p>Sur la base de vos déclarations, nous pensons que :</p>
     <div class="dangerosity" :data-level="results.dangerosity">
-      <div v-if="results.dangerosity === 0">Votre logement ne comporte pas de problème particulier</div>
-      <div
-        v-if="results.dangerosity === 1"
-      >L'état de votre logement est bon, mais certaines choses sont à surveiller</div>
-      <div v-if="results.dangerosity === 2">Votre logement présente des problèmes graves</div>
-      <div v-if="results.dangerosity === 3">Votre logement est dangereux, vous devez agir rapidement</div>
-      <div v-if="results.dangerosity === 4">Votre logement est dangereux, vous devez agir maintenant</div>
+      <div>{{qualif_logements[results.dangerosity]}}</div>
     </div>
     <div v-if="results.advices.fissures">
       <p>{{ results.advices.fissures.description }}</p>
@@ -21,7 +15,7 @@
           v-if="results.dangerosity === 4"
         >Vous devez impérativement notifier le syndic et le propriétaire du caractère grave et urgent de la situation, par recommandé.</v-ons-list-item>
         <v-ons-list-item
-          v-if="results.dangerosity >= 4"
+          v-if="results.dangerosity >= 3"
         >Nous vous invitons à signaler également le problème au Pôle départemental de lutte contre l'habitat indigne, qui pourra envoyer un expert :
           <ul>
             <li>
@@ -73,6 +67,13 @@ export default {
   },
   data () {
     return {
+      qualif_logements: [
+        "Votre logement ne comporte pas de problème particulier",
+        "L'état de votre logement est bon, mais certaines choses sont à surveiller",
+        "Votre logement présente des problèmes graves",
+        "Votre logement est dangereux, vous devez agir rapidement",
+        "Votre logement est dangereux, vous devez agir rapidement"
+      ],
       answers: shared.answers,
       // answers: {
       //   // insalubre: true,
