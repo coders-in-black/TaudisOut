@@ -15,14 +15,6 @@ import DiagnosticForm from '@/components/DiagnosticForm';
 import DiagnosticResults from '@/components/DiagnosticResults';
 import Guide from '@/components/Guide';
 
-const Settings = {
-  template: `
-<div>
-  Settings page
-</div>
-`
-}
-
 Vue.use(Router)
 Vue.use(VueOnsen)
 Vue.use(VueResource)
@@ -49,21 +41,18 @@ export default new Router({
     },
     {
       path: '/diagnostic/new',
-      alias: '/',
       name: 'DiagnosticForm',
       component: DiagnosticForm,
       // props: (route) => ({ step: route.query.step })
     },
     {
       path: '/diagnostic/result',
-      alias: '/',
       name: 'DiagnosticResults',
       component: DiagnosticResults,
       // props: (route) => ({ step: route.query.step })
     },
     {
       path: '/map',
-      alias: '/',
       name: 'Carte',
       component: TaudisMap,
       // props: (route) => ({ step: route.query.step })
