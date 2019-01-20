@@ -13,10 +13,6 @@
           <div v-show='false'>{{selected_marker}}</div><!-- Hack to prevent empty popup -->
           <div v-if="selected_marker">
             <span>address: {{selected_marker.address}}</span>
-            <div v-for="(questions, diagType) in selected_marker.questions" v-bind:key="diagType">
-              <h4>{{diagType}}</h4>
-              <div v-for="(question, idx) in questions" v-bind:key='idx'>{{question}}</div>
-            </div>
             <img v-for="(image, idx) in selected_marker.images" v-bind:key='idx' :src="image" width='80%'/>
             <v-ons-button @click="detail(selected_marker)">Détail</v-ons-button>
           </div>
@@ -56,6 +52,7 @@
 import config from '../config'
 import {LMap, LTileLayer, LMarker, LFeatureGroup, LPopup, LIcon } from 'vue2-leaflet'
 import _ from 'lodash'
+import shared from '../shared'
 
 export default {
   name: 'TaudisMap',
@@ -82,15 +79,8 @@ export default {
   },
   async mounted() {
     const response = await this.$http.get(config.http.api + '/poi')
-    this.markers = response.body.data;
+    this.markers = response.body.data.map( marker => shared.toView(marker));
     this.markers.forEach( marker => {
-      marker.images = marker.images.map(img => config.http.api + '/' + img)
-      marker.questions = _.chain(marker.questions)
-        .groupBy('type')
-        .mapValues( (questions) => {
-          return questions.map(({q, a}) => q + ' ? ' + a)
-        })
-        .value()
       const icon_color = marker.status === 'DiagnosticPending' ? 'grey' :
         (['WorksDone', 'Solved'].includes(marker.status) || marker.diagnostic.severity === 'confort' ?
           'green' : (

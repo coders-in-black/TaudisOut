@@ -59,7 +59,7 @@ export default new Router({
       // props: (route) => ({ step: route.query.step })
     },
     {
-      path: '/diganostic/:id',
+      path: '/diagnostic/:id',
       alias: '/',
       name: 'DiagDetail',
       component: DiagnosticDetail,

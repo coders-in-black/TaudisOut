@@ -75,8 +75,8 @@ DiagnosticSchema.methods.toAPI = (mode = 'list') ->
             {
                 @_id
                 @location
-                @images
-                @questions
+                @address
+                images: @images[0..0]
                 @diagnostic
                 @status
             }
