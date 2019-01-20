@@ -8,7 +8,7 @@
     </div>
     <div v-if="cracks">
       <button-question
-        :choices="[{label: 'Sur la facade', value: 'facade'}, {label: 'Dans la cage d\'escalier', value: 'escaier'}, {label: 'Dans un appartement', value: 'appartement'}]"
+        :choices="[{label: 'Sur la facade', value: 'facade'}, {label: 'Dans la cage d\'escalier', value: 'escalier'}, {label: 'Dans un appartement', value: 'appartement'}]"
         :value.sync="detail.lieu"
       >
         <h4>À quel endroit se trouve la fissure ?</h4>
@@ -65,9 +65,7 @@
           <h4>Est-ce que la cloison se décolle du sol ?</h4>
         </button-question>
       </div>
-      <v-ons-button
-        @click="$emit('filled', {next: 'photos'})"
-      >Étape suivante</v-ons-button>
+      <v-ons-button @click="$emit('filled', {next: 'photos'})">Étape suivante</v-ons-button>
     </div>
   </div>
 </template>
