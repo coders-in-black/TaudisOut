@@ -2,7 +2,9 @@
   <div id="app">
     <v-ons-page>
       <v-ons-toolbar>
-        <a @click.prevent="$router.push({name: 'Diagnostic'})" class="center">Pericolo</a>
+        <a @click.prevent="$router.push({name: 'Diagnostic'})" class="center">
+          <img class="logo" src="/static/logo.png" height="30" alt="Logo">
+        </a>
       </v-ons-toolbar>
       <v-ons-tabbar
         position="auto"
@@ -73,6 +75,9 @@ body {
   margin: 0;
 }
 
+.logo {
+  margin-top: 5px;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
