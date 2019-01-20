@@ -22,7 +22,6 @@
 </template>
 
 <script>
-from
 export default {
   data () {
     return {
