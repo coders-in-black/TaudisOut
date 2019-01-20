@@ -1,6 +1,7 @@
 <template>
   <div>
     <h4>Confirmer votre addresse : </h4>
+    <spinner v-if="0 === addresses.length" class="spinner"></spinner>
     <v-ons-list>
       <v-ons-list-item v-for="(_address, $index) in addresses" :key="$index" tappable>
         <label class="left">
@@ -25,8 +26,12 @@
 <script>
 import config from '../../config'
 import shared from '../../shared.js'
+import spinner from '../assets/spinner'
 
 export default {
+  components: {
+    spinner
+  },
   async mounted() {
     const coordinates = await this.$getLocation({enableHighAccuracy: true})
     this.location = coordinates;
