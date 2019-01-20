@@ -10,10 +10,10 @@ import 'onsenui/css/onsenui.css'
 import 'onsenui/css/onsen-css-components.css'
 
 import TaudisMap from '@/components/TaudisMap'
-import Declare from '@/components/Declare';
 import Diagnostic from '@/components/Diagnostic';
 import DiagnosticForm from '@/components/DiagnosticForm';
 import DiagnosticResults from '@/components/DiagnosticResults';
+import Guide from '@/components/Guide';
 
 const Settings = {
   template: `
@@ -41,13 +41,6 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/accueil',
-      alias: '/',
-      name: 'Home',
-      component: TaudisMap,
-      // props: (route) => ({ step: route.query.step })
-    },
-    {
       path: '/diagnostic',
       alias: '/',
       name: 'Diagnostic',
@@ -69,15 +62,16 @@ export default new Router({
       // props: (route) => ({ step: route.query.step })
     },
     {
-      path: '/declarer',
-      name: 'Declare',
-      component: Declare,
+      path: '/map',
+      alias: '/',
+      name: 'Carte',
+      component: TaudisMap,
       // props: (route) => ({ step: route.query.step })
     },
     {
-      path: '/reglages',
-      name: 'Settings',
-      component: Settings,
+      path: '/guide',
+      name: 'Guide',
+      component: Guide,
       // props: (route) => ({ step: route.query.step })
     },
   ]
