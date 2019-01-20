@@ -6,7 +6,7 @@
     <v-ons-list>
       <v-ons-list-item v-for="(_address, $index) in addresses" :key="$index" tappable>
         <label class="left">
-          <v-ons-radio :input-id="'radio-' + $index" :value="_address" v-model=" address"></v-ons-radio>
+          <v-ons-radio modifier="material" :input-id="'radio-' + $index" :value="_address" v-model=" address"></v-ons-radio>
         </label>
         <label :for="'radio-' + $index" class="center">{{ _address }}</label>
       </v-ons-list-item>

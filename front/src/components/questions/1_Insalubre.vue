@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     answer(value) {
-      this.insalubre = {insalubre: value};
+      this.insalubre = value;
       const next = value || value === false ? 'photos': 'fissures'
       this.$emit('filled', {next});
     }
