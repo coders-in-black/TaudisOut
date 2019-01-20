@@ -1,11 +1,27 @@
 config    = require '../config'
 mongoose  = require "mongoose"
 Schema    = mongoose.Schema
+_ = require 'lodash'
 
 DiagTypes = [
     'insalubre'
     'fissures'
     'humidité'
+]
+
+DiagSeverity = [
+    'confort'
+    'indecency'
+    'unhealthy'
+    'urgence'
+]
+
+Statuses = [
+    'DiagnosticPending'
+    'DiagnosticCompleted'
+    'WorksPending'
+    'WorksDone'
+    'Solved'
 ]
 
 DiagnosticSchema = new Schema
@@ -27,37 +43,45 @@ DiagnosticSchema = new Schema
         q: String
         a: String
     ]
-    diagnostic: [
-       type:
-            type: String
-            enum: DiagTypes
+    diagnostic:
         severity:
             type: String
-            enum: [
-                'confort'
-                'indecency'
-                'unhealthy'
-                'urgence'
+            enum: DiagSeverity
+        types: [
+            type:
+                    type: String
+                    enum: DiagTypes
+                severity:
+                    type: String
+                    enum: DiagSeverity
             ]
-    ]
     resolution_process: [
 
     ]
 
     status:
         type: String
-        enum: [
-            'DiagnosticPending'
-            'DiagnosticCompleted'
-            'WorksPending'
-            'WorksDone'
-            'Solved'
-        ]
+        enum: Statuses
     public:
         type: Boolean
 
 
-DiagnosticSchema.methods.toAPI = ->
-    @toObject()
+DiagnosticSchema.methods.toAPI = (mode = 'list') ->
+    switch mode
+        when 'detail'
+            to_ret = @toObject()
+            to_ret.diagnostic.severity = _.sample DiagSeverity
+            to_ret.status = _.sample Statuses[0..1]
+            to_ret
+        when 'list'
+            {
+                @_id
+                @location
+                @images
+                @questions
+                diagnostic:
+                    severity: _.sample DiagSeverity
+                status: _.sample Statuses[0..1]
+            }
 
 module.exports = Diagnostic = mongoose.model 'Diagnostic', DiagnosticSchema
