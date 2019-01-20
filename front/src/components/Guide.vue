@@ -21,6 +21,11 @@
           <div v-if="contact.phone"><v-ons-icon icon="phone"></v-ons-icon>
             <a :href="'tel:'+contact.phone">{{contact.phone}}</a>
           </div>
+          <div v-if="contact.services && contact.services.length">
+            <ul>
+              <li v-for="(service, idx2) in contact.services" :key="idx2">{{service}}</li>
+            </ul>
+          </div>
         </div>
       </v-ons-list-item>
     </v-ons-list>
