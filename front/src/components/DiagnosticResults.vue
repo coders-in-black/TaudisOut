@@ -25,9 +25,10 @@ export default {
     return {
       // answers: shared.answers,
       answers: {
+        // insalubre: true,
         insalubre: null,
         fissures: {
-          cracks: true,
+          cracks: false,
           detail: {
             lieu: 'escalier',
             forme: 'droite',
@@ -60,3 +61,22 @@ export default {
   }
 }
 </script>
+<style>
+.dangerosity {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1em;
+}
+.dangerosity[data-level="0"] {
+  color: green;
+}
+.dangerosity[data-level="1"] {
+  color: rgb(167, 150, 0);
+}
+.dangerosity[data-level="2"] {
+  color: orange;
+}
+
+.dangerosity[data-level="3"] {
+  color: red;
+}
+</style>
