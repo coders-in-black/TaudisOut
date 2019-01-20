@@ -110,6 +110,7 @@ header span {
 .btn__content .button {
   margin: 5px;
 }
+
 /* Spacing Helpers */
 /* --------------- */
 .man,

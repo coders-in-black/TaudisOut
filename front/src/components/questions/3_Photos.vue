@@ -1,15 +1,15 @@
 <template>
   <div>
-    <h4>Ajouter des photos</h4>
+    <h4>Ajouter des photos (optionnel)</h4>
+    <p>L'envoi de photo peut nous aider à diagnostiquer votre logement et soutenir la lutte contre le logement indigne.</p>
     <div class="pictures">
       <picture-input
         v-for="(image, idx) in images"
         v-bind:key="idx"
         ref="pictureInput"
         @change="onChange"
-
         margin="16"
-        accept="image/jpeg,image/png"
+        accept="image/jpeg, image/png"
         size="10"
         :removable="image !== null"
         buttonClass="btn"
@@ -17,12 +17,11 @@
         :customStrings="{
           tap: 'Ajouter une photo',
           remove: 'Supprimer'
-        }">
-      </picture-input>
+        }"
+      ></picture-input>
     </div>
     <div class="btn__content mtm">
-      <v-ons-button modifier="cta" @click="$emit('filled', {next: 'address'})"
-      >Étape suivante</v-ons-button>
+      <v-ons-button modifier="cta" @click="$emit('filled', {next: 'address'})">Étape suivante</v-ons-button>
     </div>
   </div>
 </template>

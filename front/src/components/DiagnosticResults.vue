@@ -65,6 +65,7 @@
 
 <script>
 import shared from '../shared.js'
+import config from '../config'
 
 export default {
   mounted() {
@@ -92,6 +93,16 @@ export default {
       //   }
       // }
     };
+  },
+  async mounted () {
+    // shared.address = '28 rue jean de bernardy 13001 Marseille, France'
+    // shared.diagnostic = this.results
+    if (shared.address) {
+      let payload = shared.payload()
+      console.log("payload", payload)
+      const response = await this.$http.post(config.http.api + '/diagnostic', payload)
+      console.log('response', response, shared.address);
+    }
   },
   computed: {
     results () {
