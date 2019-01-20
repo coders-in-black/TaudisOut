@@ -1,7 +1,6 @@
 <template>
   <div>
     <h4>Confirmer votre addresse : </h4>
-    {{location}}
     <v-ons-list>
       <v-ons-list-item v-for="(_address, $index) in addresses" :key="$index" tappable>
         <label class="left">
@@ -29,12 +28,9 @@ import shared from '../../shared.js'
 
 export default {
   async mounted() {
-    console.log('mounted', this.$http);
     const coordinates = await this.$getLocation({enableHighAccuracy: true})
-    console.log('coordinates', coordinates);
     this.location = coordinates;
     const response = await this.$http.post(config.http.api + '/reverse_geocoding', {location: coordinates})
-    console.log('addresses', response.body)
     this.addresses = response.body
   },
   data () {

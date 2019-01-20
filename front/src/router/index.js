@@ -13,6 +13,7 @@ import TaudisMap from '@/components/TaudisMap'
 import Diagnostic from '@/components/Diagnostic';
 import DiagnosticForm from '@/components/DiagnosticForm';
 import DiagnosticResults from '@/components/DiagnosticResults';
+import DiagnosticDetail from '@/components/DiagnosticDetail';
 import Guide from '@/components/Guide';
 
 Vue.use(Router)
@@ -55,6 +56,13 @@ export default new Router({
       path: '/map',
       name: 'Carte',
       component: TaudisMap,
+      // props: (route) => ({ step: route.query.step })
+    },
+    {
+      path: '/diganostic/:id',
+      alias: '/',
+      name: 'DiagDetail',
+      component: DiagnosticDetail,
       // props: (route) => ({ step: route.query.step })
     },
     {
