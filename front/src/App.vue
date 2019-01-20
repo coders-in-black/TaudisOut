@@ -2,7 +2,7 @@
   <div id="app">
     <v-ons-page>
       <v-ons-toolbar>
-        <a href="/" class="center">BalanceTonTaudis</a>
+        <a @click.prevent="$router.push({name: 'Diagnostic'})" class="center">BalanceTonTaudis</a>
       </v-ons-toolbar>
       <v-ons-tabbar
               position="auto"
