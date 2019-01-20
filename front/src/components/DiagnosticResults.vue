@@ -52,8 +52,6 @@
         <router-link to="/guide">consultez notre guide à destination des locataires</router-link>
       </p>
     </div>
-    {{ results }}
-    {{ answers }}
   </v-ons-page>
 </template>
 
