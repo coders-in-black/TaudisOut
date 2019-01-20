@@ -45,14 +45,14 @@ export default {
                   // props: {step: this.step}
               },
               {
-                  name: 'Declare',
-                  label: 'Signaler',
-                  icon: 'exclamation-triangle',
+                  name: 'Carte',
+                  label: 'Carte',
+                  icon: 'map-marked-alt',
                   // badge: 7,
               },
               {
-                  name: 'Settings',
-                  label: 'Réglages',
+                  name: 'Guide',
+                  label: 'Guide',
                   icon: 'question-circle',
               }
           ]
