@@ -1,12 +1,15 @@
 <template>
   <div class="question">
     <slot></slot>
+
+    <div class="btn__content">
     <v-ons-button
       :modifier="{outline: choice.value === value}"
       v-for="choice in realChoices"
       :key="choice.value"
       @click="$emit('update:value', choice.value)"
     >{{ choice.label }}</v-ons-button>
+    </div>
   </div>
 </template>
 <script>

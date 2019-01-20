@@ -13,9 +13,10 @@
         :src="'test.png'"
       >Suintements</image-choice>
       <image-choice :id="fuite" @updated="handle('fuite', $event)" :src="'test.png'">Fuites</image-choice>
-      <v-ons-button
-        @click="$emit('filled', {answer: {value: true, detail: null}, next: null})"
-      >Passer à l'étape suivante</v-ons-button>
+      <div class="btn__content">
+        <v-ons-button modifier="cta" @click="$emit('filled', {answer: {value: true, detail: null}, next: null})"
+        >Passer à l'étape suivante</v-ons-button>
+      </div>
     </div>
   </div>
 </template>

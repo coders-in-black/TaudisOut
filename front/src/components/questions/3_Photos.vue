@@ -20,9 +20,10 @@
         }">
       </picture-input>
     </div>
-    <v-ons-button
-      @click="$emit('filled', {next: 'address'})"
-    >Étape suivante</v-ons-button>
+    <div class="btn__content mtm">
+      <v-ons-button modifier="cta" @click="$emit('filled', {next: 'address'})"
+      >Étape suivante</v-ons-button>
+    </div>
   </div>
 </template>
 
