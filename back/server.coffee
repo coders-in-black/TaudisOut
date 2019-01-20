@@ -16,6 +16,12 @@ app.use express.static('data')
 
 app.use bodyParser.json({ limit: '20Mb' })
 
+app.get '/diagnostic/:id', (req, res) ->
+  diag = await models.Diagnostic.findOne _id: req.params.id
+  res.json
+    result: 'success'
+    data: diag.toAPI('detail')
+
 app.get '/poi', (req, res) ->
   pois = await models.Diagnostic.find()
 

@@ -18,6 +18,7 @@
               <div v-for="(question, idx) in questions" v-bind:key='idx'>{{question}}</div>
             </div>
             <img v-for="(image, idx) in selected_marker.images" v-bind:key='idx' :src="image" width='80%'/>
+            <v-ons-button @click="detail(selected_marker)">Détail</v-ons-button>
           </div>
         </l-popup>
       </l-feature-group>
@@ -26,7 +27,14 @@
         v-bind:key="marker._id"
         :lat-lng="marker.location.coordinates"
         @click="openPopUp(marker.location.coordinates, marker)"
-      ></l-marker>
+      >
+        <l-icon
+          :icon-anchor="iconAnchor"
+          class-name="marker"
+        >
+          <img :src="marker.icon">
+        </l-icon>
+      </l-marker>
     </l-map>
   </div>
 </template>
@@ -35,11 +43,18 @@
 .leaflet-popup-content {
   width: 250px !important;
 }
+.marker {
+  padding: 18px;
+  background-position: 0px 0px;
+  width: auto !important;
+  height: auto !important;
+  outline: none;
+}
 </style>
 
 <script>
 import config from '../config'
-import {LMap, LTileLayer, LMarker, LFeatureGroup, LPopup } from 'vue2-leaflet'
+import {LMap, LTileLayer, LMarker, LFeatureGroup, LPopup, LIcon } from 'vue2-leaflet'
 import _ from 'lodash'
 
 export default {
@@ -49,10 +64,12 @@ export default {
       LTileLayer,
       LMarker,
       LFeatureGroup,
-      LPopup
+      LPopup,
+      LIcon
   },
   data () {
     return {
+      iconAnchor: [23, 23],
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       zoom: 13,
       selected_marker: null,
@@ -74,6 +91,13 @@ export default {
           return questions.map(({q, a}) => q + ' ? ' + a)
         })
         .value()
+      const icon_color = marker.status === 'DiagnosticPending' ? 'grey' :
+        (['WorksDone', 'Solved'].includes(marker.status) || marker.diagnostic.severity === 'confort' ?
+          'green' : (
+            marker.diagnostic.severity === 'urgence' ? 'red' : 'orange'
+          )
+        )
+      marker.icon = `static/img/icons/point_${icon_color}.png`
     })
   },
   methods: {
@@ -89,6 +113,14 @@ export default {
     openPopUp (latLng, caller) {
       this.selected_marker = caller;
       this.$refs.features.mapObject.openPopup(latLng);
+    },
+    detail (selected_marker) {
+      this.$router.push({
+        name: 'DiagDetail',
+        params: {
+          id: selected_marker._id
+        }
+      })
     }
   }
 }
