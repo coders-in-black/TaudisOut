@@ -1,10 +1,8 @@
 <template>
-  <div><<<<<<< HEAD
+  <div>
     <h4>Confirmer votre addresse (optionnel)</h4>
     <p>Ceci nous permettra de conserver une trace de votre diagnostic pour soutenir la lutte contre le logement indigne.</p>||||||| merged common ancestors
-    <h4>Confirmer votre addresse :</h4>=======
-    <h4>Confirmer votre addresse :</h4>
-    <spinner v-if="0 === addresses.length" class="spinner"></spinner>>>>>>>> 7c1808aa33614cf82a703b9308c36777cf274705
+    <spinner v-if="0 === addresses.length" class="spinner"></spinner>
     <v-ons-list>
       <v-ons-list-item v-for="(_address, $index) in addresses" :key="$index" tappable>
         <label class="left">
