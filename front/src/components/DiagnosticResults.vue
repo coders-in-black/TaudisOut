@@ -13,6 +13,8 @@
     </div>
     <div v-if="results.advices.fissures">
       <p>{{ results.advices.fissures.description }}</p>
+    </div>
+    <div v-if="results.dangerosity > 0">
       <p>Prochaines étapes :</p>
       <v-ons-list>
         <v-ons-list-item
@@ -44,12 +46,17 @@
           >le guide pratique à destination des locataire</a>.
         </v-ons-list-item>
         <v-ons-list-item v-if="results.dangerosity >= 2">
-          <router-link to="/guide">Entre en contact avec les associations de terrain</router-link>&nbsp;qui pourront vous accompagner dans vos démarches.
+          <router-link to="/guide">Entrez en contact avec les associations de terrain</router-link>&nbsp;qui pourront vous accompagner dans vos démarches.
         </v-ons-list-item>
         <v-ons-list-item
-          v-if="results.dangerosity < 4"
+          v-if="results.dangerosity < 4 && results.advices.fissures"
         >Tenez le syndic et le propriétaire informé en cas d'évolution de la fissure.</v-ons-list-item>
       </v-ons-list>
+    </div>
+    <div>
+      <p>En cas de doute ou de question sur votre situation, ou pour vous faire accompagner,
+        <router-link to="/guide">consultez notre guide à destination des locataires</router-link>
+      </p>
     </div>
     {{ results }}
     {{ answers }}
@@ -65,25 +72,25 @@ export default {
   },
   data () {
     return {
-      // answers: shared.answers,
-      answers: {
-        // insalubre: true,
-        insalubre: null,
-        fissures: {
-          cracks: true,
-          detail: {
-            lieu: 'appartement',
-            forme: 'droite',
-            traversante: true,
-            escalierPenche: false,
-            evolutive: true,
-            emplacement: 'fenetres',
-            murPorteur: true,
-            cloisonSol: true,
-            plusieursMurs: true,
-          }
-        }
-      }
+      answers: shared.answers,
+      // answers: {
+      //   // insalubre: true,
+      //   insalubre: true,
+      //   fissures: {
+      //     cracks: true,
+      //     detail: {
+      //       lieu: 'appartement',
+      //       forme: 'droite',
+      //       traversante: true,
+      //       escalierPenche: false,
+      //       evolutive: true,
+      //       emplacement: 'fenetres',
+      //       murPorteur: true,
+      //       cloisonSol: true,
+      //       plusieursMurs: true,
+      //     }
+      //   }
+      // }
     };
   },
   computed: {
@@ -95,7 +102,7 @@ export default {
         }
       }
       if (this.answers.insalubre) {
-        result.dangerosity = 3
+        result.dangerosity = 4
         return result
       }
       if (!this.answers.fissures.cracks) {
@@ -171,40 +178,6 @@ export default {
             }
           }
         }
-        // if (d.traversante && d.evolutive && (d.murPorteur || d.lieu === 'facade')) {
-        //   result.dangerosity = 3
-        //   result.advices.fissures = {
-        //     description: "La fissure est traversante, évolue et se trouve sur un mur porteur. Il faut impérativement contacter le syndic ou le propriétaire via un recommandé.",
-        //   }
-        // } else if ((d.traversante || !d.evolutive) && (d.murPorteur || d.lieu === 'facade')) {
-        //   result.dangerosity = 3
-        //   result.advices.fissures = {
-        //     description: "La fissure est traversante, évolue et se trouve sur un mur porteur. Il faut impérativement contacter le syndic ou le propriétaire via un recommandé.",
-        //   }
-        // }
-        // if (d.lieu === 'facade') {
-        //   if (!d.traversante && !d.evolutive) {
-        //     result.dangerosity = 1
-        //     advices.fissures = {
-        //       description: "Il n'y a pas de danger pour les occupants, mais il faut s'assurer que l'enduit ne chute pas sur les passants.",
-        //     }
-        //   } else if (!d.traversante && d.evolutive) {
-        //     result.dangerosity = 1
-        //     advices.fissures = {
-        //       description: "Il n'y a pas de danger pour les occupants, mais il faut surveiller l'évolution de la fissure et notifier le syndic de l'immeuble.",
-        //     }
-        //   } else if (d.traversante && d.evolutive) {
-        //     result.dangerosity = 2
-        //     advices.fissures = {
-        //       description: "Il n'y a pas de danger pour les occupants, mais il faut surveiller l'évolution de la fissure et notifier le syndic de l'immeuble.",
-        //     }
-        //   }
-        // }
-//         1.Une ou plusieurs fissures en façade non traversante:
-// si détachement d’enduit: sur la base des information communiquées, il semble qu’il n’y ai pas de danger pour les occupants mais il faut purger l’enduit pour les passants
-// si pas de détachement d’enduit: il semble qu’il n’y ai pas de danger pour les occupants mais à surveiller Niveau: 1
-
-
       }
       return result
       }
