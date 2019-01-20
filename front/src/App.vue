@@ -55,10 +55,15 @@ export default {
                   // badge: 7,
               },
               {
+                  name: 'chat',
+                  label: 'Chat',
+                  icon: 'comment',
+              },
+              {
                   name: 'Guide',
                   label: 'Guide',
                   icon: 'question-circle',
-              }
+              },
           ]
       }
   },
