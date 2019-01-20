@@ -2,22 +2,24 @@
   <div id="app">
     <v-ons-page>
       <v-ons-toolbar>
-        <a @click.prevent="$router.push({name: 'Diagnostic'})" class="center">BalanceTonTaudis</a>
+        <a @click.prevent="$router.push({name: 'Diagnostic'})" class="center">Pericolo</a>
       </v-ons-toolbar>
       <v-ons-tabbar
-              position="auto"
-              @reactive="log('reactive')"
-              @postchange="log('postchange')"
-              @prechange="log('prechange')"
-              @init.native="log('init')"
-              @show.native="log('show')"
-              @hide.native="log('hide')"
-              @destroy.native="log('destroy')"
+        position="auto"
+        @reactive="log('reactive')"
+        @postchange="log('postchange')"
+        @prechange="log('prechange')"
+        @init.native="log('init')"
+        @show.native="log('show')"
+        @hide.native="log('hide')"
+        @destroy.native="log('destroy')"
       >
         <router-view slot="pages"></router-view>
         <!-- @todo : gérer les slot -->
         <!--<router-view slot="pages"></router-view>-->
-        <v-ons-tab v-for="tab in tabs" :key="tab.name"
+        <v-ons-tab
+          v-for="tab in tabs"
+          :key="tab.name"
           :icon="tab.icon"
           :label="tab.label"
           :active="$route.name === tab.name"
@@ -302,5 +304,4 @@ header span {
 .pll {
   padding-left: 4rem;
 }
-
 </style>
